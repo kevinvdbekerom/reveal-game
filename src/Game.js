@@ -8,6 +8,7 @@ const Game = () => {
     const [searchParams] = useSearchParams();
     const [scannedAnimal, setScannedAnimal] = useState("")
     const navigate = useNavigate()
+    const unlockMap = {tiger: "Sev", monkey:"Kev", baby:""}
 
     useEffect(() => {
         const animalFromQR = searchParams.get("animal") || "";
@@ -16,7 +17,7 @@ const Game = () => {
         const newAnimals = moveToFront(updatedAnimals, currentAnimal)
         setAnimals(newAnimals)
         setScannedAnimal(animals[0].name)
-        navigate('/')
+        navigate('/reveal-game')
     }, [searchParams])
 
     const moveToFront = (data, matchingName) => {
@@ -38,9 +39,18 @@ const Game = () => {
         resetGame()
     }
 
+    const unlocked = (name) => {
+        return animals.some((animal) => animal.name.toLowerCase() === name && animal.active) ? "unlocked" : ""
+    }
+
     return (
         <div className="card game">
-            <p><b>Sev</b> & <b>Kev</b> hebben een <b>baby besteld</b>. Daar is <b>Nala</b> erg blij mee! Welke knuffel zou het beste bij de kleine passen; <b>Giraf</b>, <b>Panda</b> of <b>Poes</b>?</p>
+            <p><b className={unlocked("tiger")}>Sev</b> & <b className={unlocked("monkey")}>Kev</b> hebben een <b className={unlocked("baby")}>baby besteld</b>. 
+            Daar is <b className={unlocked("dog")}>Nala</b> erg blij mee! 
+            Welke knuffel zou het beste bij de kleine passen; 
+            <b className={unlocked("giraffe")}>Giraf</b>, 
+            <b className={unlocked("panda")}>Panda</b> 
+            of <b className={unlocked("cat")}>Poes</b>?</p>
             <div className="animal-queue">
                 {animals.map((animal, index) => (
                     animal.active ?
@@ -50,7 +60,7 @@ const Game = () => {
                 ${animal.name.toLowerCase() === scannedAnimal.toLowerCase() ? "active" : ""}
             `}
                     >
-                        <img src={`img/${animal.name}.gif`} alt={animal.name} />
+                        <img src={`${process.env.PUBLIC_URL}/img/${animal.name}.gif`} alt={animal.name} />
                     </div> : <></>
                 ))}
             </div>

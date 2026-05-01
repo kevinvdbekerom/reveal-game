@@ -33,7 +33,7 @@ export const DataProvider = ({ children }) => {
         localStorage.removeItem("progress")
         setProgress(0)
         setAnimals(defaultAnimals)
-        navigate('/')
+        navigate('/reveal-game')
     }
 
 

@@ -340,6 +340,22 @@ body {
 }
 
 
+.card {
+  width: 100%;
+  max-width: 80%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  margin-bottom: 0.25em;
+}
+
+.card b.unlocked {
+  color:#22c55e;
+}
+
+
 @media only screen and (min-width: 610px) {
   html {
     font-size: 22px;
@@ -393,16 +409,6 @@ body {
 }
 
 
-.card {
-  width: 100%;
-  max-width: 80%;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  text-align: center;
-  margin-bottom: 0.25em;
-}
 
 /* new game */
 
