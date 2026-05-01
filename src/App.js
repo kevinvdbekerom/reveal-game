@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react'
+import Progress from './Progress'
+import Game from './Game'
+import Won from './Won'
+import { DataProvider } from './context/DataContext'
+import DataContext from "./context/DataContext";
 
 function App() {
+  const { progress } = useContext(DataContext)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {/* <Header title='React JS Blog'/> */}
+      <DataProvider>
+
+        {/* <Nav/> */}
+        <Progress/> 
+        <Won/>
+        <Game/>
+      </DataProvider>
+
+        {/* <Footer /> */}
     </div>
   );
 }
