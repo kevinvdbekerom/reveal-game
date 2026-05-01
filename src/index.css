@@ -27,9 +27,9 @@ body {
 }
 
 .App {
-  width: 100%;
-  max-width: 800px;
-  /* height: 100vh; */
+  width: clamp(320px, 90vw, 900px);
+  margin: 0 auto;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -353,6 +353,13 @@ body {
 
 .card b.unlocked {
   color:#22c55e;
+}
+
+.qr-codes img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  padding: 0.25em;
 }
 
 
