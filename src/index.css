@@ -321,7 +321,7 @@ body {
 }
 
 .animal.active {
-  border-color: #22c55e;
+  border-color:burlywood;
 }
 
 .animal.unlocked {
@@ -352,7 +352,11 @@ body {
 }
 
 .card b.unlocked {
-  color:#22c55e;
+  color:#ffd84d;  
+}
+
+.card b.inOrder {
+  color:#22c55e
 }
 
 .qr-codes img {

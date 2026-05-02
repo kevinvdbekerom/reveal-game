@@ -8,13 +8,17 @@ const Game = () => {
     const [searchParams] = useSearchParams();
     const [scannedAnimal, setScannedAnimal] = useState("")
     const navigate = useNavigate()
-    const unlockMap = { tiger: "Sev", monkey: "Kev", baby: "" }
 
     useEffect(() => {
+        const correctOrder = ["tiger", "monkey", "baby", "dog", "giraffe", "panda", "cat"]
+
         const animalFromQR = searchParams.get("animal") || "";
         const currentAnimal = animals.some((animal) => animal.name.toLowerCase() === animalFromQR.toLowerCase()) ? animalFromQR : ""
-        const updatedAnimals = animals.map(animal => animal.name.toLowerCase() === currentAnimal.toLowerCase() ? { ...animal, active: true } : animal)
-        const newAnimals = moveToFront(updatedAnimals, currentAnimal)
+        const updatedAnimals = animals
+        .map(animal => animal.name.toLowerCase() === currentAnimal.toLowerCase() ? { ...animal, active: true } : animal)
+        const orderedAnimals = updatedAnimals
+        .map((animal, index) => correctOrder.indexOf(animal.name) === index && animal.active ? {...animal, inOrder:true} : {...animal, inOrder:false})
+        const newAnimals = moveToFront(orderedAnimals, currentAnimal)
         setAnimals(newAnimals)
         setScannedAnimal(animals[0].name)
         navigate('/reveal-game')
@@ -40,17 +44,22 @@ const Game = () => {
     }
 
     const unlocked = (name) => {
-        return animals.some((animal) => animal.name.toLowerCase() === name && animal.active) ? "unlocked" : ""
+        return animals.some((animal) => animal.name.toLowerCase() === name && animal.active)
+        ? "unlocked" : ""
+    }
+
+    const inOrder = (name) => {
+        return animals.some(a => a.name.toLowerCase() === name && a.inOrder)
+        ? "inOrder" : ""
     }
 
     return (
         <div className="card game">
-            <p><b className={unlocked("tiger")}>Sev</b> & <b className={unlocked("monkey")}>Kev</b> hebben een <b className={unlocked("baby")}>baby besteld</b>.
-                Daar is <b className={unlocked("dog")}>Nala</b> erg blij mee!
+            <p><b className={`${unlocked("tiger")} ${inOrder("tiger")}`}>Sev</b> & <b className={`${unlocked("monkey")} ${inOrder("monkey")}`}>Kev</b> hebben een <b className={`${unlocked("baby")} ${inOrder("baby")}`}>baby</b> besteld.
+                Daar is <b className={`${unlocked("dog")} ${inOrder("dog")}`}>Nala</b> erg blij mee!
                 Welke knuffel zou het beste bij de kleine passen;
-                <b className={unlocked("giraffe")}>Giraf</b>,
-                <b className={unlocked("panda")}>Panda</b>
-                of <b className={unlocked("cat")}>Poes</b>?</p>
+                <b className={`${unlocked("giraffe")} ${inOrder("giraffe")}`}> Giraf</b>,
+                <b className={`${unlocked("panda")} ${inOrder("panda")}`}> Panda</b> of <b className={`${unlocked("cat")} ${inOrder("cat")}`}> Poes</b>?</p>
             <div className="qr-codes">
                 {animals.some(a => a.name === "monkey" && a.active) &&
                     <img src={`${process.env.PUBLIC_URL}/img/qr-code-giraffe.png`} alt="qr-code-giraffe" />
