@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/reveal-game/static/css/main.e0070ac7.css",
-    "main.js": "/reveal-game/static/js/main.6bedf6e5.js",
+    "main.js": "/reveal-game/static/js/main.c48c1575.js",
     "index.html": "/reveal-game/index.html",
     "main.e0070ac7.css.map": "/reveal-game/static/css/main.e0070ac7.css.map",
-    "main.6bedf6e5.js.map": "/reveal-game/static/js/main.6bedf6e5.js.map"
+    "main.c48c1575.js.map": "/reveal-game/static/js/main.c48c1575.js.map"
   },
   "entrypoints": [
     "static/css/main.e0070ac7.css",
-    "static/js/main.6bedf6e5.js"
+    "static/js/main.c48c1575.js"
   ]
 }
